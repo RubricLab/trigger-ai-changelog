@@ -7,3 +7,12 @@ export const commitsPayload = z.object({
 });
 
 export type CommitsPayload = z.infer<typeof commitsPayload>;
+
+export const changelogPayload = z.object({
+  commits: z.array(
+    z.object({
+      message: z.string(),
+      author: z.string().optional(),
+    })
+  ),
+});

@@ -6,9 +6,9 @@ import { CommitsPayload } from "./types";
 /**
  * Forward form data to the Trigger.dev client
  */
-export const runGenerateJob = async (payload: CommitsPayload) => {
+export async function jobRun(payload: CommitsPayload) {
   return await client.sendEvent({
-    name: "changelog.generate",
+    name: "trigger.github",
     payload,
   });
-};
+}

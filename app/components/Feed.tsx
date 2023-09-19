@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import { Button } from "./Button";
-import { runGenerateJob } from "../actions";
+import { jobRun } from "../actions";
 import { useEventRunDetails } from "@trigger.dev/react";
 import toast from "react-hot-toast";
 import { DatePicker } from "./DatePicker";
@@ -21,7 +21,7 @@ const Feed = () => {
 
     const repoUrl = data.get("repoUrl") as string;
 
-    const run = await runGenerateJob({
+    const run = await jobRun({
       repoUrl,
       startDate: startDate?.toISOString(),
       endDate: endDate?.toISOString(),

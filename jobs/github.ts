@@ -9,11 +9,11 @@ const octokit = new Octokit({
 });
 
 client.defineJob({
-  id: "generate",
+  id: "github",
   name: "GitHub - Get Commits",
   version: "0.1.0",
   trigger: eventTrigger({
-    name: "changelog.generate",
+    name: "trigger.github",
     schema: commitsPayload,
   }),
   run: async (payload, io) => {
@@ -21,7 +21,7 @@ client.defineJob({
     const [owner, repo] = repoUrl.split("/").slice(-2);
 
     try {
-      const commits = await io.runTask("Fetching commits...", async () => {
+      const commitsTask = await io.runTask("Fetching commits...", async () => {
         const { data } = await octokit.rest.repos.listCommits({
           owner,
           repo,
@@ -34,7 +34,19 @@ client.defineJob({
         return data;
       });
 
-      return commits;
+      const modifiedCommits = commitsTask.map(({ commit, author }) => ({
+        message: commit.message.trim().replaceAll("\r", ""),
+        author: author?.login,
+      }));
+
+      const { id } = await io.sendEvent("Calling OpenAI...", {
+        name: "trigger.openai",
+        payload: {
+          commits: modifiedCommits,
+        },
+      });
+
+      return id;
     } catch (e) {
       console.error(e);
       throw e;
