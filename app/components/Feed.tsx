@@ -21,7 +21,11 @@ const Feed = () => {
 
     const repoUrl = data.get("repoUrl") as string;
 
-    const run = await runGenerateJob({ repoUrl, startDate, endDate });
+    const run = await runGenerateJob({
+      repoUrl,
+      startDate: startDate?.toISOString(),
+      endDate: endDate?.toISOString(),
+    });
 
     setRunId(run.id);
   };
@@ -41,8 +45,12 @@ const Feed = () => {
   }, [data?.status]);
 
   useEffect(() => {
-    if (data?.output?.length) toast(`Found ${data.output.length} commits.`);
-  }, [data?.output]);
+    if (!data?.tasks) return;
+
+    data.tasks.forEach((task) => {
+      toast(task.displayKey);
+    });
+  }, [data?.tasks]);
 
   return (
     <form action={submit} className="space-y-8 flex flex-col items-end">

@@ -21,13 +21,17 @@ client.defineJob({
     const [owner, repo] = repoUrl.split("/").slice(-2);
 
     try {
-      const { data: commits } = await octokit.rest.repos.listCommits({
-        owner,
-        repo,
-        // Default to one week ago
-        since: (startDate ? startDate : daysAgo(7)).toISOString(),
-        until: (endDate ? endDate : now()).toISOString(),
-        per_page: 100,
+      const commits = await io.runTask("Fetching commits...", async () => {
+        const { data } = await octokit.rest.repos.listCommits({
+          owner,
+          repo,
+          // Default to one week ago
+          since: startDate || daysAgo(7).toISOString(),
+          until: endDate || now().toISOString(),
+          per_page: 100,
+        });
+
+        return data;
       });
 
       return commits;
