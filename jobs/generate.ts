@@ -1,7 +1,7 @@
 import { Octokit } from "octokit";
 import { client } from "@/trigger";
 import { eventTrigger } from "@trigger.dev/sdk";
-import { z } from "zod";
+import { CommitsResponse, commitsPayload } from "@/app/types";
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
@@ -13,13 +13,9 @@ client.defineJob({
   version: "0.1.0",
   trigger: eventTrigger({
     name: "changelog.generate",
-    schema: z.object({
-      repoUrl: z.string().url(),
-      startDate: z.string().optional(),
-      endDate: z.string().optional(),
-    }),
+    schema: commitsPayload,
   }),
-  run: async (payload, io, ctx) => {
+  run: async (payload, io, ctx): Promise<CommitsResponse | undefined> => {
     const { repoUrl, startDate, endDate } = payload;
     const [owner, repo] = repoUrl.split("/").slice(-2);
 

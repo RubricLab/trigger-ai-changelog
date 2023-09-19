@@ -9,7 +9,7 @@ import { useEventRunDetails } from "@trigger.dev/react";
 import toast from "react-hot-toast";
 
 const Feed = () => {
-  const [runId, setRunId] = useState();
+  const [runId, setRunId] = useState<string>();
 
   const submit = async (data: FormData) => {
     toast.loading("Generating changelog...");
