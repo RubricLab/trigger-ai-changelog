@@ -1,7 +1,7 @@
 import { Octokit } from "octokit";
 import { client } from "@/trigger";
 import { eventTrigger } from "@trigger.dev/sdk";
-import { CommitsResponse, commitsPayload } from "@/app/types";
+import { commitsPayload } from "@/app/types";
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
@@ -15,7 +15,7 @@ client.defineJob({
     name: "changelog.generate",
     schema: commitsPayload,
   }),
-  run: async (payload, io, ctx): Promise<CommitsResponse | undefined> => {
+  run: async (payload, io) => {
     const { repoUrl, startDate, endDate } = payload;
     const [owner, repo] = repoUrl.split("/").slice(-2);
 

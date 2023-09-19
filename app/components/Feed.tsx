@@ -18,8 +18,8 @@ const Feed = () => {
 
     const run = await runGenerateJob({
       repoUrl,
-      endDate: "2023-09-19T00:00:00Z",
       startDate: "2021-09-17T00:00:00Z",
+      endDate: "2023-09-19T00:00:00Z",
     });
 
     setRunId(run.id);

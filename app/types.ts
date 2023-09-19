@@ -7,9 +7,3 @@ export const commitsPayload = z.object({
 });
 
 export type CommitsPayload = z.infer<typeof commitsPayload>;
-
-export type CommitsResponse = {
-  commit: {
-    message:string
-  }
-}[] 
