@@ -1,7 +1,7 @@
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import React from "react";
 import TriggerLogo from "./TriggerLogo";
+import { GithubIcon } from "lucide-react";
 
 function Header() {
   return (
@@ -20,7 +20,7 @@ function Header() {
           href="https://github.com/rubriclab/trigger-ai-changelog"
           target="_blank"
         >
-          <GitHubLogoIcon className="w-6 h-6" />
+          <GithubIcon className="w-6 h-6" />
         </Link>
       </div>
     </header>

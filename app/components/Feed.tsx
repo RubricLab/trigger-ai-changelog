@@ -7,20 +7,21 @@ import { Button } from "./Button";
 import { runGenerateJob } from "../actions";
 import { useEventRunDetails } from "@trigger.dev/react";
 import toast from "react-hot-toast";
+import { DatePicker } from "./DatePicker";
+import { daysAgo, now } from "@/lib/utils";
 
 const Feed = () => {
   const [runId, setRunId] = useState<string>();
+
+  const [startDate, setStartDate] = useState<Date | undefined>(daysAgo(7));
+  const [endDate, setEndDate] = useState<Date | undefined>(now());
 
   const submit = async (data: FormData) => {
     toast.loading("Generating changelog...");
 
     const repoUrl = data.get("repoUrl") as string;
 
-    const run = await runGenerateJob({
-      repoUrl,
-      startDate: "2021-09-17T00:00:00Z",
-      endDate: "2023-09-19T00:00:00Z",
-    });
+    const run = await runGenerateJob({ repoUrl, startDate, endDate });
 
     setRunId(run.id);
   };
@@ -44,18 +45,20 @@ const Feed = () => {
   }, [data?.output]);
 
   return (
-    <div className="w-full">
-      <form action={submit} className="flex items-end gap-4">
-        <Input
-          label="Enter your repo URL:"
-          name="repoUrl"
-          placeholder="https://github.com/triggerdotdev/trigger.dev"
-          type="url"
-          required
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </div>
+    <form action={submit} className="space-y-8 flex flex-col items-end">
+      <Input
+        label="Repo URL"
+        name="repoUrl"
+        placeholder="https://github.com/triggerdotdev/trigger.dev"
+        type="url"
+        required
+      />
+      <div className="flex gap-4">
+        <DatePicker label="From" date={startDate} setDate={setStartDate} />
+        <DatePicker label="To" date={endDate} setDate={setEndDate} />
+      </div>
+      <Button type="submit">Get started</Button>
+    </form>
   );
 };
 

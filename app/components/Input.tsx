@@ -1,6 +1,6 @@
 "use client";
 
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { XIcon } from "lucide-react";
 import React, { useEffect, useId, useState } from "react";
 
 type Props = {
@@ -37,7 +37,7 @@ function Input({
   }, [value]);
 
   return (
-    <div className="space-y-0.5 w-full max-w-lg group">
+    <div className="space-y-0.5 w-full max-w-xl group">
       {label && (
         <label className="font-medium text-sm text-dimmed" htmlFor={inputId}>
           {label}
@@ -63,7 +63,7 @@ function Input({
             onClick={() => setValue("")}
             type="button"
           >
-            <Cross2Icon className="w-5 h-5" />
+            <XIcon className="w-5 h-5" />
           </button>
         )}
       </div>
