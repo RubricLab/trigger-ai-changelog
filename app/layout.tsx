@@ -10,8 +10,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Copy Prettifier",
-  description: "Improve your landing page copy with AI.",
+  title: "AutoChangelog",
+  description: "Generate changelogs from a repo URL.",
 };
 
 export default function RootLayout({
