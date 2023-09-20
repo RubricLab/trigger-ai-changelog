@@ -3,7 +3,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="w-screen h-10">
+    <footer className="fixed bottom-0 left-0 w-screen h-10">
       <div className="flex items-center justify-between h-full px-12 text-dimmed text-sm">
         <div>
           Built on{" "}

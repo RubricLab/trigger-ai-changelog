@@ -7,7 +7,7 @@ import { jobRun } from "../actions";
 import { useEventRunDetails } from "@trigger.dev/react";
 import toast from "react-hot-toast";
 import { DatePicker } from "./DatePicker";
-import { daysAgo, now } from "@/lib/utils";
+import { cn, daysAgo, now } from "@/lib/utils";
 import { Markdown } from "./Markdown";
 import { githubUrl } from "../constants";
 import { ArrowRight } from "lucide-react";
@@ -47,13 +47,13 @@ const Feed = () => {
           break;
         case "RUNNING":
           toast.dismiss();
-          toast(`${task.displayKey} ${seconds}/42...`);
+          toast(`${task.displayKey} ${seconds}/24...`);
           setSeconds((s) => s + 1);
           break;
         case "COMPLETED":
           toast.dismiss();
           toast.success(task.displayKey);
-          setSeconds(0);
+          setSeconds(1);
           break;
       }
     });
@@ -62,31 +62,48 @@ const Feed = () => {
   }, [data]);
 
   return (
-    <form action={submit} className="space-y-8 flex flex-col items-center">
-      <Input
-        label="Repo URL"
-        name="repoUrl"
-        placeholder={githubUrl}
-        type="url"
-        required
-      />
-      <div className="flex gap-4">
-        <DatePicker label="From" date={startDate} setDate={setStartDate} />
-        <DatePicker label="To" date={endDate} setDate={setEndDate} />
-      </div>
-      <Button type="submit" size="lg" className="w-full">
-        <span>Get started</span>
-        <ArrowRight className="w-4 h-4" />
-      </Button>
-      {data?.output?.markdown && (
-        <div className="px-12 py-8 !mt-12 rounded-lg bg-midnight-850 space-y-4">
-          <Markdown copiable markdown={data.output.markdown} />
-          <div className="w-full flex justify-center pt-8">
-            <DeployButton />
-          </div>
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <form
+        action={submit}
+        className="col-span-1 space-y-8 sticky top-0 h-fit pt-8"
+      >
+        <Input
+          label="Repo URL"
+          name="repoUrl"
+          placeholder={githubUrl}
+          type="url"
+          required
+        />
+        <div className="flex gap-4">
+          <DatePicker label="From" date={startDate} setDate={setStartDate} />
+          <DatePicker label="To" date={endDate} setDate={setEndDate} />
         </div>
-      )}
-    </form>
+        <Button type="submit" size="lg" className="w-full">
+          <span>Get started</span>
+          <ArrowRight className="w-4 h-4" />
+        </Button>
+      </form>
+      <div className="col-span-1 z-10 pt-8 max-w-full">
+        <label htmlFor="changelog">Changelog</label>
+        <div
+          id="changelog"
+          className={cn("px-12 py-8 rounded-lg bg-midnight-850 space-y-4", {
+            "animate-pulse": !data?.output,
+          })}
+        >
+          {data?.output?.markdown ? (
+            <div className="w-full flex flex-col items-center space-y-8">
+              <Markdown copiable markdown={data.output.markdown} />
+              <DeployButton />
+            </div>
+          ) : (
+            <div className="text-dimmed text-sm animate pulse">
+              Waiting for your first changelog...
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
