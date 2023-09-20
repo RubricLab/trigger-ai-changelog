@@ -6,14 +6,14 @@
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
-    @apply bg-midnight-900 text-bright;
+    @apply bg-background text-bright;
   }
   a {
     @apply hover:text-blue-400 transition-colors font-medium;
+  }
+  label {
+    @apply font-medium text-dimmed text-sm;
   }
   h1 {
     @apply text-5xl font-semibold tracking-tight;

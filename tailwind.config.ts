@@ -29,7 +29,7 @@ const midnight = {
 };
 
 /** Text colors */
-const bright = colors.slate[200];
+const bright = colors.slate[300];
 const dimmed = colors.slate[400];
 
 const config: Config = {
