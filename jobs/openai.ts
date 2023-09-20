@@ -21,49 +21,44 @@ client.defineJob({
     const { commits } = payload;
 
     try {
-      const res = await io.runTask("Generating changelog...", async () => {
-        const prefix = `
-    You're a head of developer relations tasked with writing a friendly changelog for your team.
+      const markdown: string = await io.runTask(
+        "Generate changelog...",
+        async () => {
+          const prefix = `
+    You're the head of developer relations tasked with writing a funny and friendly changelog for your team.
     Below are the commit messages since the last changelog.
-    Begin with one paragraph to introduce any themes or highlights.
+    Begin with a fun paragraph to introduce themes and highlights.
     Then, summarize the important commit messages in bullet points.
-    Feel free to write markdown.
-    Keep it light and limit prose.
+    Write in GitHub-flavored markdown. Use bold, primary headings!
+    Keep it funny and limit prose!
     `;
-        const prompt = `${prefix}\n\n${commits
-          .map((c) => c.message)
-          .join("\n")}`;
 
-        // const response = await io.openai.backgroundCreateChatCompletion(
-        //   "OpenAI Completions API",
-        //   {
-        //     model: "gpt-4",
-        //     messages: [
-        //       {
-        //         role: "user",
-        //         content: prompt,
-        //       },
-        //     ],
-        //   }
-        // );
-        const response = {
-          choices: [
+          const prompt = `${prefix}\n\n${commits
+            .map((c) => c.message)
+            .join("\n")}`;
+
+          const response = await io.openai.backgroundCreateChatCompletion(
+            "OpenAI Completions API",
             {
-              message: {
-                content: "dummy",
-              },
-            },
-          ],
-        };
+              model: "gpt-3.5-turbo",
+              messages: [
+                {
+                  role: "user",
+                  content: prompt,
+                },
+              ],
+            }
+          );
 
-        if (!response?.choices?.length) {
-          throw new Error("OpenAI failed to return a response");
+          if (!response?.choices?.length) {
+            throw new Error("OpenAI failed to return a response");
+          }
+
+          return response.choices[0].message?.content || "";
         }
+      );
 
-        return response.choices[0].message.content;
-      });
-
-      return res;
+      return { markdown };
     } catch (e) {
       console.error(e);
       throw e;

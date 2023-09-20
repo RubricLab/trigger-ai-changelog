@@ -22,7 +22,10 @@
     @apply text-2xl font-semibold;
   }
   h3 {
-    @apply text-lg font-sans text-dimmed;
+    @apply text-lg font-semibold font-sans text-dimmed;
+  }
+  ul {
+    @apply list-disc list-inside space-y-1;
   }
   /* Added by ShadCN */
   :root {

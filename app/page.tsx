@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Header />
-      <div className="grow flex flex-col space-y-8 items-center justify-center w-full max-w-3xl">
+      <div className="grow flex flex-col space-y-8 items-center justify-center w-full max-w-2xl md:max-w-4xl pb-20">
         <h1>
           Generate changelogs in{" "}
           <span className="bg-gradient-to-r from-white via-indigo-500 to-green-500 text-transparent bg-clip-text">

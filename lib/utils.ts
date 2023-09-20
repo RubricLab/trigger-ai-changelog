@@ -13,3 +13,9 @@ export function daysAgo(days: number) {
   const today = now();
   return new Date(today.setDate(today.getDate() - days));
 }
+
+export function copyToClipboard(text: string) {
+  if (!navigator.clipboard) return;
+
+  navigator.clipboard.writeText(text);
+}

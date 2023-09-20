@@ -16,7 +16,7 @@ type Props = {
   className?: string;
 };
 
-function Input({
+export const Input = ({
   label,
   name,
   type = "text",
@@ -27,7 +27,7 @@ function Input({
   clearable = false,
   onChange,
   className,
-}: Props) {
+}: Props) => {
   const [value, setValue] = useState(initialValue || "");
   const inputId = useId();
 
@@ -53,7 +53,9 @@ function Input({
           disabled={disabled}
           required={required}
           placeholder={placeholder}
-          className={`${className} p-2 pr-8 text-ellipsis rounded-md border border-midnight-800 bg-midnight-850 enabled:hover:bg-midnight-800 focus:outline-none focus:ring-4 ring-indigo-500/60 focus:border-opacity-0 w-full transition-colors disabled:opacity-70`}
+          className={`${
+            className || ""
+          } p-2 pr-8 text-ellipsis rounded-md border border-midnight-800 bg-midnight-850 enabled:hover:bg-midnight-800 focus:outline-none focus:ring-4 ring-indigo-500/60 focus:border-opacity-0 w-full transition-colors disabled:opacity-70`}
         />
         {clearable && (
           <button
@@ -69,6 +71,4 @@ function Input({
       </div>
     </div>
   );
-}
-
-export default Input;
+};

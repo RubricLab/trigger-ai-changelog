@@ -21,7 +21,7 @@ client.defineJob({
     const [owner, repo] = repoUrl.split("/").slice(-2);
 
     try {
-      const commitsTask = await io.runTask("Fetching commits...", async () => {
+      const commitsTask = await io.runTask("Fetch commits...", async () => {
         const { data } = await octokit.rest.repos.listCommits({
           owner,
           repo,
@@ -35,18 +35,21 @@ client.defineJob({
       });
 
       const modifiedCommits = commitsTask.map(({ commit, author }) => ({
-        message: commit.message.trim().replaceAll("\r", ""),
+        message: commit.message
+          .trim()
+          .replaceAll("\r", "")
+          .replaceAll("\n\n", "\n"),
         author: author?.login,
       }));
 
-      const { id } = await io.sendEvent("Calling OpenAI...", {
+      const { id } = await io.sendEvent("Call OpenAI API...", {
         name: "trigger.openai",
         payload: {
           commits: modifiedCommits,
         },
       });
 
-      return id;
+      return { id };
     } catch (e) {
       console.error(e);
       throw e;
