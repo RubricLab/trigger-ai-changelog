@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { copyToClipboard } from "@/lib/utils";
@@ -31,7 +30,7 @@ export const Markdown = ({ markdown, copiable }: Props) => {
         <Button
           variant="secondary"
           type="button"
-          className="absolute -top-4 -right-4 space-x-2 group-hover:opacity-100 opacity-20 transition-opacity"
+          className="absolute -top-4 -right-8 space-x-2 group-hover:opacity-100 opacity-20 transition-opacity"
           onClick={() => {
             copyToClipboard(markdown);
             setCopied(true);
@@ -45,7 +44,7 @@ export const Markdown = ({ markdown, copiable }: Props) => {
           )}
         </Button>
       )}
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+      <ReactMarkdown>{markdown}</ReactMarkdown>
     </div>
   );
 };
