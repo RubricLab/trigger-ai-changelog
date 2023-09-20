@@ -62,7 +62,7 @@ const Feed = () => {
   }, [data]);
 
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
       <form
         action={submit}
         className="col-span-1 space-y-8 sticky top-0 h-fit pt-8"

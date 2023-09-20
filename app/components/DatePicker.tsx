@@ -26,7 +26,7 @@ export function DatePicker({ label, date, setDate }: Props) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className="space-y-0.5 max-w-full group flex flex-col">
+        <div className="space-y-0.5 w-full max-w-xs group flex flex-col">
           {label && (
             <label
               className="font-medium text-sm text-dimmed"
@@ -39,7 +39,7 @@ export function DatePicker({ label, date, setDate }: Props) {
             type="button"
             variant={"outline"}
             className={cn(
-              "w-[280px] justify-start text-left font-normal",
+              "w-full justify-start text-left font-normal",
               !date && "text-muted-foreground"
             )}
           >

@@ -27,6 +27,10 @@
   ul {
     @apply list-disc list-inside space-y-1;
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
   /* Added by ShadCN */
   :root {
     --background: 222.2 84% 4.9%;

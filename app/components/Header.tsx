@@ -6,7 +6,7 @@ import { GithubIcon } from "lucide-react";
 function Header() {
   return (
     <header className="w-screen h-20">
-      <div className="flex items-center justify-between h-full px-12">
+      <div className="flex items-center justify-between h-full px-4 md:px-12">
         <div className="flex items-baseline gap-2">
           <h1 className="text-2xl font-bold tracking-tighter">AutoChangelog</h1>
           <div className="text-xs flex items-center gap-1">
