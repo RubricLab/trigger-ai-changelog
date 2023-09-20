@@ -19,6 +19,7 @@ const Feed = () => {
 
   const [startDate, setStartDate] = useState<Date | undefined>(daysAgo(7));
   const [endDate, setEndDate] = useState<Date | undefined>(now());
+  const [seconds, setSeconds] = useState(1);
 
   const { data } = useEventRunDetails(runId);
 
@@ -44,12 +45,15 @@ const Feed = () => {
         case "ERRORED":
           toast.error(task.displayKey);
           break;
-        case "WAITING":
-          toast.loading(task.displayKey);
+        case "RUNNING":
+          toast.dismiss();
+          toast(`${task.displayKey} ${seconds}/42...`);
+          setSeconds((s) => s + 1);
           break;
         case "COMPLETED":
           toast.dismiss();
           toast.success(task.displayKey);
+          setSeconds(0);
           break;
       }
     });

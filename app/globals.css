@@ -19,10 +19,10 @@
     @apply text-5xl font-semibold tracking-tight;
   }
   h2 {
-    @apply text-2xl font-semibold;
+    @apply text-3xl font-semibold;
   }
   h3 {
-    @apply text-lg font-semibold font-sans text-dimmed;
+    @apply text-xl font-semibold;
   }
   ul {
     @apply list-disc list-inside space-y-1;

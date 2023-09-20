@@ -24,18 +24,19 @@ client.defineJob({
 
     try {
       const markdown: string = await io.runTask(
-        "Generate changelog...",
+        "Generate changelog",
         async () => {
           const prefix = `
-    You're the head of developer relations tasked with writing a changelog for your team that's fun to read.
-    Start with a title to introduce the release.
-    Below are the commit messages since the last changelog.
-    Begin with a fun paragraph to introduce themes and highlights.
-    Then, summarize the important commit messages in bullet points.
-    Write in GitHub-flavored markdown.
-    Omit IDs and timestamps.
-    Keep it light and limit prose.
-    `;
+Limit prose.
+You're the head of developer relations tasked with writing a changelog for your team that's fun to read.
+Start with a catchy title that captures the essence of the commits.
+Below are the commit messages since the last changelog.
+Begin with a fun paragraph to introduce themes and highlights.
+Then, summarize the important commit messages in bullet points.
+Write in GitHub-flavored markdown.
+Omit IDs and timestamps.
+Keep it light and limit prose.
+          `;
 
           const prompt = `${prefix}\n\n${commits
             .map((c) => c.message)
