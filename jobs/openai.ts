@@ -3,6 +3,8 @@ import { eventTrigger } from "@trigger.dev/sdk";
 import { changelogPayload } from "@/app/types";
 import { OpenAI } from "@trigger.dev/openai";
 
+const maxTokens = Math.floor(4097 * 3.5);
+
 const openai = new OpenAI({
   id: "openai",
   apiKey: process.env.OPENAI_API_KEY!,
@@ -25,17 +27,20 @@ client.defineJob({
         "Generate changelog...",
         async () => {
           const prefix = `
-    You're the head of developer relations tasked with writing a funny and friendly changelog for your team.
+    You're the head of developer relations tasked with writing a changelog for your team that's fun to read.
+    Start with a title to introduce the release.
     Below are the commit messages since the last changelog.
     Begin with a fun paragraph to introduce themes and highlights.
     Then, summarize the important commit messages in bullet points.
-    Write in GitHub-flavored markdown. Use bold, primary headings!
-    Keep it funny and limit prose!
+    Write in GitHub-flavored markdown.
+    Omit IDs and timestamps.
+    Keep it light and limit prose.
     `;
 
           const prompt = `${prefix}\n\n${commits
             .map((c) => c.message)
-            .join("\n")}`;
+            .join("\n")
+            .slice(0, maxTokens)}`;
 
           const response = await io.openai.backgroundCreateChatCompletion(
             "OpenAI Completions API",
