@@ -27,15 +27,14 @@ client.defineJob({
         "Generate changelog",
         async () => {
           const prefix = `
-Limit prose.
-You're the head of developer relations tasked with writing a changelog for your team that's fun to read.
-Start with a catchy title that captures the essence of the commits.
+Limit prose. Be extremely concise.
+You're the head of developer relations at a SaaS. You'll write a short and professional but fun changelog.
 Below are the commit messages since the last changelog.
-Begin with a fun paragraph to introduce themes and highlights.
-Then, summarize the important commit messages in bullet points.
-Write in GitHub-flavored markdown.
-Omit IDs and timestamps.
-Keep it light and limit prose.
+Title: catchy and foretelling.
+Intro: fun; themes and highlights.
+Then, summarize the most important changes in bullet points.
+Write in markdown. Ignore numbers, IDs, and timestamps. Keep it light.
+Limit prose.
           `;
 
           const prompt = `${prefix}\n\n${commits
