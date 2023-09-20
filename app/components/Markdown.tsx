@@ -37,7 +37,7 @@ export const Markdown = ({ markdown, copiable }: Props) => {
             setCopied(true);
           }}
         >
-          <span>{copied ? "Copied!" : "Copy to clipboard"}</span>
+          <span>{copied ? "Copied!" : "Copy markdown"}</span>
           {copied ? (
             <CheckIcon className="w-4 h-4 text-green-500" />
           ) : (

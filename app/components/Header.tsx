@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import TriggerLogo from "./TriggerLogo";
+import { TriggerLogo } from "./TriggerLogo";
 import { GithubIcon } from "lucide-react";
 
 function Header() {

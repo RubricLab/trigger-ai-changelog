@@ -12,6 +12,7 @@ import { Markdown } from "./Markdown";
 import { githubUrl } from "../constants";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import DeployButton from "./DeployButton";
 
 const Feed = () => {
   const [runId, setRunId] = useState<string>();
@@ -19,8 +20,10 @@ const Feed = () => {
   const [startDate, setStartDate] = useState<Date | undefined>(daysAgo(7));
   const [endDate, setEndDate] = useState<Date | undefined>(now());
 
+  const { data } = useEventRunDetails(runId);
+
   const submit = async (data: FormData) => {
-    toast.loading("Start up...");
+    toast.loading("Starting up...");
 
     const repoUrl = data.get("repoUrl") as string;
 
@@ -32,8 +35,6 @@ const Feed = () => {
 
     setRunId(run.id);
   };
-
-  const { data } = useEventRunDetails(runId);
 
   useEffect(() => {
     if (!data?.tasks) return;
@@ -74,8 +75,11 @@ const Feed = () => {
         <ArrowRight className="w-4 h-4" />
       </Button>
       {data?.output?.markdown && (
-        <div className="px-12 py-8 !mt-12 rounded-lg bg-gray-900">
+        <div className="px-12 py-8 !mt-12 rounded-lg bg-midnight-850 space-y-4">
           <Markdown copiable markdown={data.output.markdown} />
+          <div className="w-full flex justify-center pt-8">
+            <DeployButton />
+          </div>
         </div>
       )}
     </form>
