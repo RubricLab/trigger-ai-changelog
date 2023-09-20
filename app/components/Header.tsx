@@ -3,7 +3,7 @@ import React from "react";
 import { TriggerLogo } from "./TriggerLogo";
 import { GithubIcon } from "lucide-react";
 
-function Header() {
+export const Header = () => {
   return (
     <header className="w-screen h-20">
       <div className="flex items-center justify-between h-full px-4 md:px-12">
@@ -25,6 +25,4 @@ function Header() {
       </div>
     </header>
   );
-}
-
-export default Header;
+};

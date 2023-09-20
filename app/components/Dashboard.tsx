@@ -14,7 +14,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DeployButton from "./DeployButton";
 
-const Feed = () => {
+export const Dashboard = () => {
   const [runId, setRunId] = useState<string>();
 
   const [startDate, setStartDate] = useState<Date | undefined>(daysAgo(7));
@@ -106,5 +106,3 @@ const Feed = () => {
     </div>
   );
 };
-
-export default Feed;

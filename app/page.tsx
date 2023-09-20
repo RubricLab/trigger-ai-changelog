@@ -1,6 +1,6 @@
-import Feed from "./components/Feed";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import { Dashboard } from "./components/Dashboard";
+import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
             To get started, enter your repo URL.
           </div>
         </div>
-        <Feed />
+        <Dashboard />
       </div>
       <Footer />
     </main>
