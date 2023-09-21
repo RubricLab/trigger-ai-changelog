@@ -65,10 +65,10 @@ export const Dashboard = () => {
     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
       <form
         action={submit}
-        className="col-span-1 space-y-8 sticky top-0 h-fit pt-8"
+        className="col-span-1 space-y-8 sticky top-0 h-fit p-4 border border-slate-750 bg-slate-900 rounded-md"
       >
         <Input
-          label="Repo URL"
+          label="Enter a public repo URL"
           name="repoUrl"
           placeholder={githubUrl}
           type="url"
@@ -79,8 +79,7 @@ export const Dashboard = () => {
           <DatePicker label="To" date={endDate} setDate={setEndDate} />
         </div>
         <Button type="submit" size="lg" className="w-full">
-          <span>Get started</span>
-          <ArrowRight className="w-4 h-4" />
+          Generate Changelog
         </Button>
       </form>
       <div className="col-span-1 z-10 pt-8 max-w-full">
