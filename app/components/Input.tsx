@@ -51,7 +51,7 @@ export const Input = ({
           placeholder={placeholder}
           className={`${
             className || ""
-          } p-2 pr-8 text-ellipsis text-sm rounded-md bg-secondary/90 text-secondary-foreground enabled:hover:bg-secondary focus:outline-none focus:ring-4 ring-indigo-500/60 focus:border-opacity-0 w-full transition-colors disabled:opacity-70`}
+          } p-2 pr-8 text-ellipsis text-sm rounded-sm bg-secondary/90 text-secondary-foreground enabled:hover:bg-secondary focus:outline-none focus:ring-4 ring-indigo-500/60 focus:border-opacity-0 w-full transition-colors disabled:opacity-70`}
         />
         {clearable && (
           <button

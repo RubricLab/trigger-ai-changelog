@@ -5,7 +5,7 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <footer className="fixed bottom-0 left-0 w-screen h-14 border-t">
+    <footer className="fixed bottom-0 left-0 w-screen h-14 border-t bg-background">
       <div className="flex items-center justify-between h-full px-4 text-dimmed text-sm">
         <div className="flex gap-2">
           <div className="text-primary font-semibold">How does it work?</div>{" "}

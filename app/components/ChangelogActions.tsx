@@ -5,17 +5,17 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 type Props = {
-  markdown: string;
+  markdown?: string;
   changelogId: number;
-  repoOwner: string;
-  repoName: string;
+  owner: string;
+  repo: string;
 };
 
 export const ChangelogActions = ({
   markdown,
   changelogId,
-  repoOwner,
-  repoName,
+  owner,
+  repo,
 }: Props) => {
   const [copied, setCopied] = useState("");
 
@@ -30,19 +30,21 @@ export const ChangelogActions = ({
   }, [copied]);
 
   return (
-    <div className="w-full flex items-center justify-between">
+    <div className="w-full flex items-center justify-between text-dimmed border-b border-slate-800 pb-4">
       <h3>Changelog</h3>
       <div className="flex items-center gap-4">
         <Button
           size="sm"
           variant="secondary"
           className="space-x-2"
+          disabled={!markdown}
           onClick={() => {
+            if (!markdown) return;
             copyToClipboard(markdown);
             setCopied("text");
           }}
         >
-          <span>{copied === "text" ? "Copied!" : "Copy as text"}</span>
+          <span>Copy as text</span>
           {copied === "text" ? (
             <CheckIcon className="w-4 h-4 text-green-500" />
           ) : (
@@ -53,22 +55,27 @@ export const ChangelogActions = ({
           size="sm"
           variant="secondary"
           className="space-x-2"
+          disabled={!markdown}
           onClick={() => {
+            if (!markdown) return;
             copyToClipboard(markdown);
             setCopied("markdown");
           }}
         >
-          <span>{copied === "markdown" ? "Copied!" : "Copy as markdown"}</span>
+          <span>Copy as markdown</span>
           {copied === "markdown" ? (
             <CheckIcon className="w-4 h-4 text-green-500" />
           ) : (
             <CopyIcon className="w-4 h-4" />
           )}
         </Button>
-        <Link
-          href={`${repoOwner}.${window.location.host}/${repoName}/${changelogId}`}
-        >
-          <Button size="sm" variant="default" className="space-x-2">
+        <Link href={`${owner}.${window.location.host}/${repo}/${changelogId}`}>
+          <Button
+            disabled={!markdown}
+            size="sm"
+            variant="default"
+            className="space-x-2"
+          >
             <span>View page</span>
             <ExternalLinkIcon className="w-4 h-4" />
           </Button>

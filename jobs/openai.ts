@@ -24,7 +24,7 @@ client.defineJob({
 
     try {
       const markdown: string = await io.runTask(
-        "Generate changelog",
+        "Generating changelog...",
         async () => {
           const prefix = `
 Limit prose. Be extremely concise.

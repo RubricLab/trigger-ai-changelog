@@ -21,7 +21,7 @@ client.defineJob({
     const [owner, repo] = repoUrl.split("/").slice(-2);
 
     try {
-      const commitsTask = await io.runTask("Fetch commits...", async () => {
+      const commitsTask = await io.runTask("Fetching commits...", async () => {
         const { data } = await octokit.rest.repos.listCommits({
           owner,
           repo,
