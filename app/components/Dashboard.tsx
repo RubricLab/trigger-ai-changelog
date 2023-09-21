@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -7,21 +6,21 @@ import { jobRun } from "../actions";
 import { useEventRunDetails } from "@trigger.dev/react";
 import toast from "react-hot-toast";
 import { DatePicker } from "./DatePicker";
-import { cn, daysAgo, now } from "@/lib/utils";
+import { daysAgo, now } from "@/lib/utils";
 import { Markdown } from "./Markdown";
 import { githubUrl } from "../constants";
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DeployButton from "./DeployButton";
+import { ChangelogActions } from "./ChangelogActions";
 
 export const Dashboard = () => {
-  const [runId, setRunId] = useState<string>();
+  const [eventId, setEventId] = useState<string>();
 
   const [startDate, setStartDate] = useState<Date | undefined>(daysAgo(7));
   const [endDate, setEndDate] = useState<Date | undefined>(now());
   const [seconds, setSeconds] = useState(1);
 
-  const { data } = useEventRunDetails(runId);
+  const { data } = useEventRunDetails(eventId);
 
   const submit = async (data: FormData) => {
     toast.loading("Starting up...");
@@ -34,35 +33,24 @@ export const Dashboard = () => {
       endDate: endDate?.toISOString(),
     });
 
-    setRunId(run.id);
+    setEventId(run.id);
   };
 
   useEffect(() => {
     if (!data?.tasks) return;
 
     data.tasks.forEach((task) => {
-      switch (task.status) {
-        case "ERRORED":
-          toast.error(task.displayKey);
-          break;
-        case "RUNNING":
-          toast.dismiss();
-          toast(`${task.displayKey} ${seconds}/24...`);
-          setSeconds((s) => s + 1);
-          break;
-        case "COMPLETED":
-          toast.dismiss();
-          toast.success(task.displayKey);
-          setSeconds(1);
-          break;
-      }
+      if (task.status === "RUNNING")
+        // toast(`${task.displayKey} ${seconds}/24...`);
+        setSeconds((s) => s + 1);
+      else if (task.status === "COMPLETED") setSeconds(1);
     });
 
-    if (data.output?.id) setRunId(data.output.id);
+    if (data.output?.id) setEventId(data.output.id);
   }, [data]);
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-8">
       <form
         action={submit}
         className="col-span-1 space-y-8 sticky top-0 h-fit p-4 border border-slate-750 bg-slate-900 rounded-md"
@@ -82,22 +70,25 @@ export const Dashboard = () => {
           Generate Changelog
         </Button>
       </form>
-      <div className="col-span-1 z-10 pt-8 max-w-full">
-        <label htmlFor="changelog">Changelog</label>
-        <div
-          id="changelog"
-          className={cn("px-12 py-8 rounded-lg bg-midnight-850 space-y-4", {
-            "animate-pulse": !data?.output,
-          })}
-        >
+      <div className="col-span-1 md:col-span-2 z-10 max-w-full">
+        <div className="px-12 py-8 rounded-lg border border-dashed h-full border-slate-700 space-y-4">
+          <ChangelogActions
+            markdown={"abc"}
+            repoOwner={"triggerdotdev"}
+            repoName={"trigger.dev"}
+            changelogId={20230921}
+          />
           {data?.output?.markdown ? (
             <div className="w-full flex flex-col items-center space-y-8">
-              <Markdown copiable markdown={data.output.markdown} />
+              <Markdown markdown={data.output.markdown} />
               <DeployButton />
             </div>
           ) : (
-            <div className="text-dimmed text-sm animate pulse">
-              Waiting for your first changelog...
+            <div className="flex flex-col text-center items-center justify-center h-full space-y-4">
+              <div className="text-xl">✨</div>
+              <span className="text-dimmed w-64">
+                Enter a public repo URL to generate your changelog.
+              </span>
             </div>
           )}
         </div>

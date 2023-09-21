@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/server";
 import React from "react";
-import { TriggerIcon } from "./components/TriggerLogo";
+import { TriggerIcon } from "./components/logos/Trigger";
 
 // Route segment config
 export const runtime = "edge";

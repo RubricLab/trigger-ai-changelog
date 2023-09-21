@@ -1,5 +1,5 @@
 import React from "react";
-import { TriggerIcon } from "./TriggerLogo";
+import { TriggerIcon } from "./logos/Trigger";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 
