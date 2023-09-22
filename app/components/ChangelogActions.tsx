@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { copyToClipboard, today } from "@/lib/utils";
+import { cn, copyToClipboard, today } from "@/lib/utils";
 import { CheckIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
@@ -16,6 +16,7 @@ type Props = {
 
 export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
   const [copied, setCopied] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -32,31 +33,31 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
   const submit = useCallback(async () => {
     if (!markdown) return;
 
+    setLoading(true);
+
     const changelogDate = date ? date.toISOString().slice(0, 10) : today();
 
-    const save = await saveToSupabase({
+    await saveToSupabase({
       markdown,
       owner,
       repo,
       date: changelogDate,
     });
 
+    setLoading(false);
+
     const publicUrl = `http://${owner}.${window.location.host}/${repo}/${changelogDate}`;
     router.push(publicUrl);
   }, [markdown, owner, repo, date, router]);
 
   return (
-    <form
-      action={submit}
-      className="w-full flex items-center justify-between text-dimmed border-b border-slate-800 pb-4"
-    >
+    <div className="w-full flex items-center justify-between text-dimmed border-b border-slate-800 pb-4">
       <h3>Changelog</h3>
       <div className="flex items-center gap-4">
         <Button
           size="sm"
           variant="secondary"
           className="space-x-2"
-          type="button"
           disabled={!markdown}
           onClick={() => {
             if (!markdown) return;
@@ -75,7 +76,6 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
           size="sm"
           variant="secondary"
           className="space-x-2"
-          type="button"
           disabled={!markdown}
           onClick={() => {
             if (!markdown) return;
@@ -91,16 +91,18 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
           )}
         </Button>
         <Button
-          disabled={!markdown}
+          disabled={!markdown || loading}
           size="sm"
           variant="default"
-          className="space-x-2"
-          type="submit"
+          className={cn("space-x-2", {
+            "animate-pulse": loading,
+          })}
+          onClick={submit}
         >
-          <span>View public page</span>
+          <span>{loading ? "Saving..." : "Preview page"}</span>
           <ExternalLinkIcon className="w-4 h-4" />
         </Button>
       </div>
-    </form>
+    </div>
   );
 };
