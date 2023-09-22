@@ -20,6 +20,7 @@ export const Dashboard = () => {
   const [eventId, setEventId] = useState<string>();
   const [runLogs, setRunLogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const { data } = useEventRunDetails(eventId);
 
@@ -33,6 +34,8 @@ export const Dashboard = () => {
   const submit = useCallback(async () => {
     if (!repoUrl) return;
 
+    setSubmitted(true);
+    setLoading(true);
     setRunLogs([]);
 
     const run = await jobRun({
@@ -56,10 +59,7 @@ export const Dashboard = () => {
 
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-8 pb-16">
-      <form
-        action={submit}
-        className="col-span-1 space-y-8 sticky top-8 h-fit p-4 border border-slate-750 bg-slate-900 rounded-md"
-      >
+      <form className="col-span-1 space-y-8 sticky top-8 h-fit p-4 border border-slate-750 bg-slate-900 rounded-md">
         <Input
           label="Enter a public repo URL"
           placeholder={githubUrl}
@@ -72,8 +72,7 @@ export const Dashboard = () => {
           <DatePicker label="To" date={endDate} setDate={setEndDate} />
         </div>
         <Button
-          onClick={() => setLoading(true)}
-          type="submit"
+          onClick={submit}
           size="lg"
           className="w-full"
           disabled={loading}
@@ -86,7 +85,7 @@ export const Dashboard = () => {
         </Button>
       </form>
       <div className="col-span-1 md:col-span-2 max-w-full space-y-4">
-        {!data ? (
+        {!submitted ? (
           <div className="flex flex-col text-center items-center justify-center h-full space-y-4 rounded-lg border border-dashed border-slate-700">
             <div className="text-xl">✨</div>
             <span className="text-dimmed w-64">
@@ -96,13 +95,13 @@ export const Dashboard = () => {
         ) : (
           <div className="w-full flex flex-col space-y-4">
             <ChangelogActions
-              markdown={data.output?.markdown}
+              markdown={data?.output?.markdown}
               owner={owner}
               repo={repo}
               date={endDate}
             />
-            {data.output?.markdown ? (
-              <Markdown markdown={data.output?.markdown} />
+            {data?.output?.markdown ? (
+              <Markdown markdown={data?.output?.markdown} />
             ) : (
               <div className="text-dimmed">
                 {runLogs.map((task, index) => (
