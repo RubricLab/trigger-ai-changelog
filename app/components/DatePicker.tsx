@@ -17,7 +17,7 @@ import { useId } from "react";
 type Props = {
   label?: string;
   date?: Date;
-  setDate: (date?: Date) => void;
+  setDate: (date: Date) => void;
 };
 
 export function DatePicker({ label, date, setDate }: Props) {
@@ -52,7 +52,7 @@ export function DatePicker({ label, date, setDate }: Props) {
         <Calendar
           mode="single"
           selected={date}
-          onSelect={setDate}
+          onSelect={(day) => (day ? setDate(day) : null)}
           initialFocus
         />
       </PopoverContent>
