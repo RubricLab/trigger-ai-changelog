@@ -7,6 +7,7 @@ import { client } from "@/trigger";
 import { wait } from "@/lib/utils";
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
+import Link from "next/link";
 
 type Props = {
   params: { repo: string; date: string };
@@ -19,7 +20,7 @@ export default async function page({ params }: Props) {
   const host = headersList.get("host");
   const subdomain = host?.split(".")?.[0];
 
-  if (!subdomain) redirect("/");
+  if (!subdomain || !repo || !date) redirect("/");
 
   const triggerEvent = await getSupabaseChangelogs({
     owner: subdomain,
@@ -47,9 +48,27 @@ export default async function page({ params }: Props) {
   return (
     <main className="min-h-screen relative">
       <Header />
-      <div className="flex flex-col items-center justify-center mx-auto space-y-16 px-4 md:px-12 pb-20 pt-16 max-w-7xl">
+      <div className="flex flex-col items-start space-y-4 justify-start mx-auto px-4 md:px-12 pb-20 pt-16 max-w-5xl">
+        <div>
+          <Link
+            href={`https://github.com/${subdomain}/${repo}`}
+            className="text-dimmed"
+          >
+            {subdomain}/<span className="font-semibold">{repo}</span>
+          </Link>
+          <div className="text-dimmed text-sm">
+            {new Date(date).toLocaleString("en-us", {
+              weekday: "long",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </div>
+        </div>
         {markdown ? (
-          <Markdown markdown={markdown} />
+          <div className="text-left space-y-4">
+            <Markdown markdown={markdown} />
+          </div>
         ) : (
           <div className="text-dimmed text-sm animate pulse">
             Waiting for your first changelog...
