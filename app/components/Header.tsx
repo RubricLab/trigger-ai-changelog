@@ -8,13 +8,13 @@ export const Header = () => {
     <header className="w-screen h-14 border-b">
       <div className="flex items-center justify-between h-full px-4 md:px-12">
         <div className="flex items-baseline gap-2">
-          <h1 className="text-2xl font-bold tracking-tighter">
-            <Link href="/">
+          <Link href="/">
+            <div className="text-2xl font-bold tracking-tighter">
               <span className="bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text">
                 AutoChangelog
               </span>
-            </Link>
-          </h1>
+            </div>
+          </Link>
           <div className="text-xs text-dimmed flex items-center gap-1">
             powered by
             <Link
