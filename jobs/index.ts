@@ -2,3 +2,4 @@
 
 export * from "./openai";
 export * from "./github";
+export * from "./supabase";

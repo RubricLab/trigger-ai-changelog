@@ -1,6 +1,6 @@
 import { client } from "@/trigger";
 import { eventTrigger } from "@trigger.dev/sdk";
-import { changelogPayload } from "@/app/types";
+import { openaiPayload } from "@/app/types";
 import { OpenAI } from "@trigger.dev/openai";
 
 const maxTokens = Math.floor(4097 * 3.5);
@@ -16,7 +16,7 @@ client.defineJob({
   version: "0.1.0",
   trigger: eventTrigger({
     name: "trigger.openai",
-    schema: changelogPayload,
+    schema: openaiPayload,
   }),
   integrations: { openai },
   run: async (payload, io) => {

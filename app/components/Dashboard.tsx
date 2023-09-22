@@ -13,20 +13,23 @@ import { ChangelogActions } from "./ChangelogActions";
 import { CheckCircleIcon, Loader2, XCircleIcon } from "lucide-react";
 
 export const Dashboard = () => {
-  const [eventId, setEventId] = useState<string>();
   const [repoUrl, setRepoUrl] = useState<string>();
-  const [startDate, setStartDate] = useState<Date | undefined>(daysAgo(7));
-  const [endDate, setEndDate] = useState<Date | undefined>(now());
+  const [startDate, setStartDate] = useState<Date>(daysAgo(7));
+  const [endDate, setEndDate] = useState<Date>(now());
+
+  const [eventId, setEventId] = useState<string>();
   const [runLogs, setRunLogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
   const { data } = useEventRunDetails(eventId);
 
+  // Pull owner and repo from repoUrl
   const [owner, repo] = useMemo(
     () => repoUrl?.split("/").slice(-2) || [],
     [repoUrl]
   );
 
+  // Call a server action to trigger the job run
   const submit = useCallback(async () => {
     if (!repoUrl) return;
 
@@ -42,6 +45,7 @@ export const Dashboard = () => {
     setEventId(run.id);
   }, [repoUrl, startDate, endDate]);
 
+  // Track the job run status
   useEffect(() => {
     data?.tasks?.forEach((task) => {
       setRunLogs((logs) => [...logs, task]);
@@ -90,7 +94,7 @@ export const Dashboard = () => {
               markdown={data.output?.markdown}
               owner={owner}
               repo={repo}
-              changelogId={20230921}
+              date={endDate}
             />
             {data.output?.markdown ? (
               <Markdown markdown={data.output?.markdown} />

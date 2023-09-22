@@ -1,7 +1,7 @@
 "use server";
 
 import { client } from "@/trigger";
-import { CommitsPayload, SupabasePayload } from "./types";
+import { CommitsPayload, SupabaseLookup, SupabasePayload } from "./types";
 
 export async function jobRun(payload: CommitsPayload) {
   return await client.sendEvent({
@@ -13,6 +13,13 @@ export async function jobRun(payload: CommitsPayload) {
 export async function saveToSupabase(payload: SupabasePayload) {
   return await client.sendEvent({
     name: "trigger.supabase.upsert",
+    payload,
+  });
+}
+
+export async function getSupabaseChangelogs(payload: SupabaseLookup) {
+  return await client.sendEvent({
+    name: "trigger.supabase.get",
     payload,
   });
 }

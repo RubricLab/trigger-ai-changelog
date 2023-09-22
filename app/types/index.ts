@@ -22,6 +22,13 @@ export const supabasePayload = z.object({
   date: z.string(),
 });
 
+export const supabaseLookup = z.object({
+  owner: z.string(),
+  repo: z.string(),
+  date: z.string(),
+});
+
 export type CommitsPayload = z.infer<typeof commitsPayload>;
 export type OpenaiPayload = z.infer<typeof openaiPayload>;
 export type SupabasePayload = z.infer<typeof supabasePayload>;
+export type SupabaseLookup = z.infer<typeof supabaseLookup>;
