@@ -33,7 +33,6 @@ export const Dashboard = () => {
   const submit = useCallback(async () => {
     if (!repoUrl) return;
 
-    setLoading(true);
     setRunLogs([]);
 
     const run = await jobRun({
@@ -72,7 +71,13 @@ export const Dashboard = () => {
           <DatePicker label="From" date={startDate} setDate={setStartDate} />
           <DatePicker label="To" date={endDate} setDate={setEndDate} />
         </div>
-        <Button type="submit" size="lg" className="w-full" disabled={loading}>
+        <Button
+          onClick={() => setLoading(true)}
+          type="submit"
+          size="lg"
+          className="w-full"
+          disabled={loading}
+        >
           {loading ? (
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
