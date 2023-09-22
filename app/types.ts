@@ -6,9 +6,7 @@ export const commitsPayload = z.object({
   endDate: z.string().datetime().optional(),
 });
 
-export type CommitsPayload = z.infer<typeof commitsPayload>;
-
-export const changelogPayload = z.object({
+export const openaiPayload = z.object({
   commits: z.array(
     z.object({
       message: z.string(),
@@ -16,3 +14,14 @@ export const changelogPayload = z.object({
     })
   ),
 });
+
+export const supabasePayload = z.object({
+  markdown: z.string(),
+  owner: z.string(),
+  repo: z.string(),
+  date: z.string(),
+});
+
+export type CommitsPayload = z.infer<typeof commitsPayload>;
+export type OpenaiPayload = z.infer<typeof openaiPayload>;
+export type SupabasePayload = z.infer<typeof supabasePayload>;
