@@ -15,21 +15,21 @@ export interface Database {
           date: string
           id: number
           markdown: string | null
-          repo: number | null
+          repo: number
         }
         Insert: {
           created_at?: string | null
           date: string
           id?: number
           markdown?: string | null
-          repo?: number | null
+          repo: number
         }
         Update: {
           created_at?: string | null
           date?: string
           id?: number
           markdown?: string | null
-          repo?: number | null
+          repo?: number
         }
         Relationships: [
           {
@@ -44,20 +44,20 @@ export interface Database {
         Row: {
           created_at: string | null
           id: number
-          name: string | null
-          owner: string | null
+          name: string
+          owner: string
         }
         Insert: {
           created_at?: string | null
           id?: number
-          name?: string | null
-          owner?: string | null
+          name: string
+          owner: string
         }
         Update: {
           created_at?: string | null
           id?: number
-          name?: string | null
-          owner?: string | null
+          name?: string
+          owner?: string
         }
         Relationships: []
       }
