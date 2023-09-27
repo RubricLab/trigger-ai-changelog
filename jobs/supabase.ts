@@ -2,9 +2,8 @@ import { client } from "@/trigger";
 import { eventTrigger } from "@trigger.dev/sdk";
 import { supabaseLookup, supabasePayload } from "@/app/types";
 import { Supabase } from "@trigger.dev/supabase";
-import { Database } from "@/app/types/supabase";
 
-const supabase = new Supabase<Database>({
+const supabase = new Supabase({
   id: "supabase",
   projectId: process.env.SUPABASE_ID!,
   supabaseKey: process.env.SUPABASE_KEY!,
