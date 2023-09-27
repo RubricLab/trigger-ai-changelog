@@ -28,7 +28,7 @@ export const Header = () => {
           </div>
         </div>
         <Link
-          href="https://github.com/rubriclab/trigger-ai-changelog"
+          href="https://github.com/triggerdotdev/autochangelog"
           target="_blank"
           className="flex items-center gap-2"
         >

@@ -1,6 +1,6 @@
 # AutoChangelog by [Trigger.dev](https://trigger.dev)
 
-Welcome to AutoChangelog! Try it for free [here](https://ai-changelog.rubric.sh).
+Welcome to AutoChangelog! Try it for free [here](https://autochangelog.dev).
 
 ## Contributing
 
@@ -42,4 +42,4 @@ You can check out [the Trigger.dev GitHub repository](https://github.com/trigger
 
 ## Deploy on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/RubricLab/ai-changelog&env=TRIGGER_API_KEY,TRIGGER_API_URL,NEXT_PUBLIC_CLIENT_TRIGGER_API_KEY,NEXT_PUBLIC_TRIGGER_API_URL,OPENAI_API_KEY,GITHUB_TOKEN&envDescription=Sign%20up%20for%20Trigger.dev%20and%20OpenAI.%20Access%20to%20GPT-4%20is%20recommended.&envLink=https://trigger.dev/&project-name=autochangelog&repository-name=autochangelog&demo-title=AutoChangelog&demo-url=https://ai-changelog.rubric.sh)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/triggerdotdev/autochangelog&env=TRIGGER_API_KEY,TRIGGER_API_URL,NEXT_PUBLIC_CLIENT_TRIGGER_API_KEY,NEXT_PUBLIC_TRIGGER_API_URL,OPENAI_API_KEY,GITHUB_TOKEN&envDescription=Sign%20up%20for%20Trigger.dev%20and%20OpenAI.%20Access%20to%20GPT-4%20is%20recommended.&envLink=https://trigger.dev/&project-name=autochangelog&repository-name=autochangelog&demo-title=AutoChangelog&demo-url=https://autochangelog.dev)

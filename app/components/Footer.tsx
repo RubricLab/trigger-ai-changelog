@@ -8,7 +8,12 @@ export const Footer = () => {
     <footer className="fixed bottom-0 left-0 w-screen h-14 border-t bg-background">
       <div className="flex items-center justify-between h-full px-4 text-dimmed text-sm">
         <div className="flex gap-2">
-          <div className="text-primary font-semibold">How does it work?</div>{" "}
+          <Link
+            href="https://dev.to/tedspare/generate-changelogs-with-ai-2c0f-temp-slug-6382472?preview=4c013ec6e1a91076e60d156e8fb09323e70bf3ef5c305018e227115736c572093b6afd041357863bdd0f7f4e5f335d32f956bb566398737a5709d40b"
+            className="text-primary font-semibold"
+          >
+            How does it work?
+          </Link>{" "}
           <div className="text-sm">
             This site is powered by{" "}
             <Link href="https://trigger.dev" target="_blank">
@@ -18,7 +23,7 @@ export const Footer = () => {
           </div>
         </div>
         <Link
-          href="https://github.com/rubriclab/trigger-ai-changelog"
+          href="https://github.com/triggerdotdev/autochangelog"
           target="_blank"
         >
           <Button
