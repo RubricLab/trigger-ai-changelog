@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn, copyToClipboard, today } from "@/lib/utils";
+import { cn, copyToClipboard, stripMarkdown, today } from "@/lib/utils";
 import { CheckIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
@@ -61,7 +61,8 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
           disabled={!markdown}
           onClick={() => {
             if (!markdown) return;
-            copyToClipboard(markdown);
+            const plainText = stripMarkdown(markdown);
+            copyToClipboard(plainText);
             setCopied("text");
           }}
         >
