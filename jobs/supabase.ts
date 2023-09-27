@@ -91,7 +91,6 @@ client.defineJob({
 
       return task;
     } catch (e) {
-      console.error(e);
       throw e;
     }
   },

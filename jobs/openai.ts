@@ -65,7 +65,6 @@ Limit prose.
 
       return { markdown };
     } catch (e) {
-      console.error(e);
       throw e;
     }
   },
