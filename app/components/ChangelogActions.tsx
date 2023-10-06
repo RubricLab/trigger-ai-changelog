@@ -52,45 +52,46 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
 
   return (
     <div className="w-full flex items-center justify-between text-dimmed border-b border-slate-800 pb-4">
-      <h3>Changelog</h3>
-      <div className="flex items-center gap-4">
-        <Button
-          size="sm"
-          variant="secondary"
-          className="space-x-2"
-          disabled={!markdown}
-          onClick={() => {
-            if (!markdown) return;
-            const plainText = stripMarkdown(markdown);
-            copyToClipboard(plainText);
-            setCopied("text");
-          }}
-        >
-          <span>Copy as text</span>
-          {copied === "text" ? (
-            <CheckIcon className="w-4 h-4 text-green-500" />
-          ) : (
-            <CopyIcon className="w-4 h-4" />
-          )}
-        </Button>
-        <Button
-          size="sm"
-          variant="secondary"
-          className="space-x-2"
-          disabled={!markdown}
-          onClick={() => {
-            if (!markdown) return;
-            copyToClipboard(markdown);
-            setCopied("markdown");
-          }}
-        >
-          <span>Copy as markdown</span>
-          {copied === "markdown" ? (
-            <CheckIcon className="w-4 h-4 text-green-500" />
-          ) : (
-            <CopyIcon className="w-4 h-4" />
-          )}
-        </Button>
+      <div className="flex items-center justify-between w-full gap-4">
+        <div className="flex items-center gap-4">
+          <Button
+            size="sm"
+            variant="secondary"
+            className="space-x-2"
+            disabled={!markdown}
+            onClick={() => {
+              if (!markdown) return;
+              const plainText = stripMarkdown(markdown);
+              copyToClipboard(plainText);
+              setCopied("text");
+            }}
+          >
+            {copied === "text" ? (
+              <CheckIcon className="w-4 h-4 text-green-500" />
+            ) : (
+              <CopyIcon className="w-4 h-4" />
+            )}
+            <span>Copy as text</span>
+          </Button>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="space-x-2"
+            disabled={!markdown}
+            onClick={() => {
+              if (!markdown) return;
+              copyToClipboard(markdown);
+              setCopied("markdown");
+            }}
+          >
+            {copied === "markdown" ? (
+              <CheckIcon className="w-4 h-4 text-green-500" />
+            ) : (
+              <CopyIcon className="w-4 h-4" />
+            )}
+            <span>Copy as markdown</span>
+          </Button>
+        </div>
         <Button
           disabled={!markdown || loading}
           size="sm"
