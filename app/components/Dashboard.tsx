@@ -59,7 +59,7 @@ export const Dashboard = () => {
 
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16">
-      <form className="col-span-1 lg:col-span-5 xl:col-span-4 space-y-4 sm:space-y-6 sticky top-20 h-fit p-0 sm:p-4 border-none sm:border border-slate-750 bg-transparent sm:bg-slate-900 rounded-md">
+      <form className="col-span-1 lg:col-span-5 xl:col-span-4 space-y-4 sm:space-y-6 lg:sticky lg:top-20 h-fit p-0 sm:p-4 border-none sm:border border-slate-750 bg-transparent sm:bg-slate-900 rounded-md">
         <Input
           label="Enter a public repo URL"
           placeholder={githubUrl}
@@ -87,7 +87,7 @@ export const Dashboard = () => {
           </Button>
         </div>
       </form>
-      <div className="col-span-1 lg:col-span-7 xl:col-span-8 max-w-full space-y-4">
+      <div className="col-span-1 lg:col-span-7 xl:col-span-8 max-w-full space-y-4 pb-20">
         {!submitted ? (
           <div className="flex flex-col text-center items-center justify-center h-full py-8 space-y-4 rounded-lg border border-dashed border-slate-700">
             <p className="text-4xl">✨</p>
