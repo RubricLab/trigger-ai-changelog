@@ -6,7 +6,7 @@ import { baseUrl } from "../constants";
 
 export const Header = () => {
   return (
-    <header className="fixed bg-background w-screen h-14 border-b">
+    <header className="fixed bg-background w-screen h-14 border-b z-10">
       <div className="flex items-center justify-between h-full px-4 md:pl-4 md:pr-6">
         <div className="flex items-baseline gap-2">
           <Link

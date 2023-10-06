@@ -59,7 +59,7 @@ export const Dashboard = () => {
 
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16">
-      <form className="col-span-1 lg:col-span-5 xl:col-span-4 space-y-4 sm:space-y-6 sticky top-8 h-fit p-0 sm:p-4 border-none sm:border border-slate-750 bg-transparent sm:bg-slate-900 rounded-md">
+      <form className="col-span-1 lg:col-span-5 xl:col-span-4 space-y-4 sm:space-y-6 sticky top-20 h-fit p-0 sm:p-4 border-none sm:border border-slate-750 bg-transparent sm:bg-slate-900 rounded-md">
         <Input
           label="Enter a public repo URL"
           placeholder={githubUrl}
