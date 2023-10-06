@@ -46,11 +46,9 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
 
     setLoading(false);
 
-    const publicUrl = `http://${window.location.host}/${repo}/${changelogDate}`;
+    const publicUrl = `http://${owner}.${window.location.host}/${repo}/${changelogDate}`;
     router.push(publicUrl);
   }, [markdown, owner, repo, date, router]);
-
-  // https://triggerdotdev.autochangelog.dev/trigger.dev/2023-10-06
 
   return (
     <div className="w-full flex items-center justify-between text-dimmed border-b border-slate-800 pb-4">
@@ -73,7 +71,8 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
             ) : (
               <CopyIcon className="w-4 h-4" />
             )}
-            <span>Copy as text</span>
+            <span className="hidden sm:inline-block">Copy as text</span>
+            <span className="sm:hidden inline-block">Text</span>
           </Button>
           <Button
             size="sm"
@@ -91,7 +90,8 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
             ) : (
               <CopyIcon className="w-4 h-4" />
             )}
-            <span>Copy as markdown</span>
+            <span className="hidden sm:inline-block">Copy as markdown</span>
+            <span className="sm:hidden inline-block">Markdown</span>
           </Button>
         </div>
         <Button
@@ -103,7 +103,12 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
           })}
           onClick={submit}
         >
-          <span>{loading ? "Saving..." : "Preview page"}</span>
+          <span className="hidden sm:inline-block">
+            {loading ? "Saving..." : "View page"}
+          </span>
+          <span className="sm:hidden inline-block">
+            {loading ? "Saving..." : "View"}
+          </span>
           <ExternalLinkIcon className="w-4 h-4" />
         </Button>
       </div>

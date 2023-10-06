@@ -87,7 +87,7 @@ export const Dashboard = () => {
           </Button>
         </div>
       </form>
-      <div className="col-span-1 lg:col-span-7 xl:col-span-8 max-w-full space-y-4 pb-20">
+      <div className="col-span-1 lg:col-span-7 xl:col-span-8 max-w-full space-y-4 pb-40 sm:pb-20">
         {!submitted ? (
           <div className="flex flex-col text-center items-center justify-center h-full py-8 space-y-4 rounded-lg border border-dashed border-slate-700">
             <p className="text-4xl">✨</p>
