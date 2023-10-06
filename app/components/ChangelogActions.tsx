@@ -46,9 +46,11 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
 
     setLoading(false);
 
-    const publicUrl = `http://${owner}.${window.location.host}/${repo}/${changelogDate}`;
+    const publicUrl = `http://${window.location.host}/${repo}/${changelogDate}`;
     router.push(publicUrl);
   }, [markdown, owner, repo, date, router]);
+
+  // https://triggerdotdev.autochangelog.dev/trigger.dev/2023-10-06
 
   return (
     <div className="w-full flex items-center justify-between text-dimmed border-b border-slate-800 pb-4">
