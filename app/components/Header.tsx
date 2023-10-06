@@ -29,7 +29,7 @@ export const Header = () => {
           </div>
         </div>
         <Link
-          href="https://github.com/triggerdotdev/autochangelog"
+          href="https://github.com/triggerdotdev/ai-changelog"
           target="_blank"
           className="flex items-center gap-1.5 hover:text-indigo-500"
         >
