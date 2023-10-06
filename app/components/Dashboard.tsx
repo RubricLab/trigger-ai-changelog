@@ -58,36 +58,39 @@ export const Dashboard = () => {
   }, [data]);
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-8 pb-16">
-      <form className="col-span-1 space-y-8 sticky top-8 h-fit p-4 border border-slate-750 bg-slate-900 rounded-md">
+    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16">
+      <form className="col-span-1 lg:col-span-5 xl:col-span-4 space-y-4 sm:space-y-6 sticky top-8 h-fit p-0 sm:p-4 border-none sm:border border-slate-750 bg-transparent sm:bg-slate-900 rounded-md">
         <Input
           label="Enter a public repo URL"
           placeholder={githubUrl}
           onChange={setRepoUrl}
           type="url"
           required
+          fullWidth
         />
-        <div className="flex gap-4">
-          <DatePicker label="From" date={startDate} setDate={setStartDate} />
-          <DatePicker label="To" date={endDate} setDate={setEndDate} />
+        <div className="flex flex-col gap-y-4 sm:flex-row items-end gap-x-4 lg:flex-col lg:gap-y-4 lg:items-start">
+          <div className="flex gap-4 w-full">
+            <DatePicker label="From" date={startDate} setDate={setStartDate} />
+            <DatePicker label="To" date={endDate} setDate={setEndDate} />
+          </div>
+          <Button
+            onClick={submit}
+            size="lg"
+            className="w-full sm:w-fit lg:w-full"
+            disabled={loading}
+          >
+            {loading ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <span className="whitespace-nowrap">Generate Changelog</span>
+            )}
+          </Button>
         </div>
-        <Button
-          onClick={submit}
-          size="lg"
-          className="w-full"
-          disabled={loading}
-        >
-          {loading ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
-          ) : (
-            <span>Generate Changelog</span>
-          )}
-        </Button>
       </form>
-      <div className="col-span-1 md:col-span-2 max-w-full space-y-4">
+      <div className="col-span-1 lg:col-span-7 xl:col-span-8 max-w-full space-y-4">
         {!submitted ? (
-          <div className="flex flex-col text-center items-center justify-center h-full space-y-4 rounded-lg border border-dashed border-slate-700">
-            <div className="text-xl">✨</div>
+          <div className="flex flex-col text-center items-center justify-center h-full py-8 space-y-4 rounded-lg border border-dashed border-slate-700">
+            <p className="text-4xl">✨</p>
             <span className="text-dimmed w-64">
               Enter a public repo URL to generate your changelog.
             </span>

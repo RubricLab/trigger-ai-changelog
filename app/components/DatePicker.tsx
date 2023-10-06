@@ -39,7 +39,7 @@ export function DatePicker({ label, date, setDate }: Props) {
             type="button"
             variant={"secondary"}
             className={cn(
-              "w-full justify-start text-left font-normal",
+              "w-full justify-start text-left font-normal whitespace-nowrap",
               !date && "text-muted-foreground"
             )}
           >

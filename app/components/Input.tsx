@@ -12,6 +12,7 @@ type Props = {
   placeholder?: string;
   initialValue?: string;
   clearable?: boolean;
+  fullWidth?: boolean;
   onChange?: (value: string) => void;
   className?: string;
 };
@@ -22,6 +23,7 @@ export const Input = ({
   type = "text",
   required = false,
   disabled = false,
+  fullWidth = false,
   placeholder,
   initialValue,
   clearable = false,
@@ -37,7 +39,7 @@ export const Input = ({
   }, [value]);
 
   return (
-    <div className="space-y-0.5 w-full max-w-xl group">
+    <div className="space-y-0.5 w-full group">
       {label && <label htmlFor={inputId}>{label}</label>}
       <div className="relative">
         <input
@@ -51,7 +53,9 @@ export const Input = ({
           placeholder={placeholder}
           className={`${
             className || ""
-          } p-2 pr-8 text-ellipsis text-sm rounded-sm bg-secondary/90 text-secondary-foreground enabled:hover:bg-secondary focus:outline-none focus:ring-4 ring-indigo-500/60 focus:border-opacity-0 w-full transition-colors disabled:opacity-70`}
+          } p-2 pr-8 text-ellipsis text-sm rounded-sm bg-secondary/90 text-secondary-foreground enabled:hover:bg-secondary focus:outline-none focus:ring-4 ring-indigo-500/60 focus:border-opacity-0 w-full transition-colors disabled:opacity-70 ${
+            fullWidth ? "w-full" : "w-fit"
+          }`}
         />
         {clearable && (
           <button
