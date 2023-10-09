@@ -46,7 +46,7 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
 
     setLoading(false);
 
-    const publicUrl = `http://${owner}.${window.location.host}/${repo}/${changelogDate}`;
+    const publicUrl = `/${owner}/${repo}/${changelogDate}`;
     router.push(publicUrl);
   }, [markdown, owner, repo, date, router]);
 

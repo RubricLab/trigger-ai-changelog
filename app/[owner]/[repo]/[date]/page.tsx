@@ -10,20 +10,16 @@ import { Header } from "@/app/components/Header";
 import Link from "next/link";
 
 type Props = {
-  params: { repo: string; date: string };
+  params: { owner: string; repo: string; date: string };
 };
 
 export default async function page({ params }: Props) {
-  const { repo, date } = params;
+  const { owner, repo, date } = params;
 
-  const headersList = headers();
-  const host = headersList.get("host");
-  const subdomain = host?.split(".")?.[0];
-
-  if (!subdomain || !repo || !date) redirect("/");
+  if (!owner || !repo || !date) redirect("/");
 
   const triggerEvent = await getSupabaseChangelogs({
-    owner: subdomain,
+    owner,
     repo,
     date,
   });
@@ -51,10 +47,10 @@ export default async function page({ params }: Props) {
       <div className="flex flex-col items-start space-y-4 justify-start mx-auto px-4 md:px-12 pb-20 pt-16 max-w-5xl">
         <div>
           <Link
-            href={`https://github.com/${subdomain}/${repo}`}
+            href={`https://github.com/${owner}/${repo}`}
             className="text-dimmed"
           >
-            {subdomain}/<span className="font-semibold">{repo}</span>
+            {owner}/<span className="font-semibold">{repo}</span>
           </Link>
           <div className="text-dimmed text-sm">
             {new Date(date).toLocaleString("en-us", {
