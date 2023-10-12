@@ -4,75 +4,78 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export interface Database {
   public: {
     Tables: {
       changelogs: {
         Row: {
-          created_at: string | null
-          date: string
-          id: number
-          markdown: string | null
-          repo: number
-        }
+          created_at: string;
+          end_date: string;
+          id: number;
+          markdown: string | null;
+          repo: number;
+          start_date: string;
+        };
         Insert: {
-          created_at?: string | null
-          date: string
-          id?: number
-          markdown?: string | null
-          repo: number
-        }
+          created_at?: string;
+          end_date: string;
+          id?: number;
+          markdown?: string | null;
+          repo: number;
+          start_date: string;
+        };
         Update: {
-          created_at?: string | null
-          date?: string
-          id?: number
-          markdown?: string | null
-          repo?: number
-        }
+          created_at?: string;
+          end_date?: string;
+          id?: number;
+          markdown?: string | null;
+          repo?: number;
+          start_date?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "changelogs_repo_fkey"
-            columns: ["repo"]
-            referencedRelation: "repos"
-            referencedColumns: ["id"]
+            foreignKeyName: "changelogs_repo_fkey";
+            columns: ["repo"];
+            referencedRelation: "repos";
+            referencedColumns: ["id"];
           }
-        ]
-      }
+        ];
+      };
       repos: {
         Row: {
-          created_at: string | null
-          id: number
-          name: string
-          owner: string
-        }
+          created_at: string | null;
+          id: number;
+          owner: string;
+          repo: string;
+        };
         Insert: {
-          created_at?: string | null
-          id?: number
-          name: string
-          owner: string
-        }
+          created_at?: string | null;
+          id?: number;
+          owner: string;
+          repo: string;
+        };
         Update: {
-          created_at?: string | null
-          id?: number
-          name?: string
-          owner?: string
-        }
-        Relationships: []
-      }
-    }
+          created_at?: string | null;
+          id?: number;
+          owner?: string;
+          repo?: string;
+        };
+        Relationships: [];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Enums: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
+      [_ in never]: never;
+    };
+  };
 }

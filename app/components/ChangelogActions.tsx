@@ -1,24 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn, copyToClipboard, stripMarkdown, today } from "@/lib/utils";
+import { cn, copyToClipboard, stripMarkdown } from "@/lib/utils";
 import { CheckIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
-import { saveToSupabase } from "../actions";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type Props = {
   markdown?: string;
-  owner: string;
-  repo: string;
-  date?: Date;
 };
 
-export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
+export const ChangelogActions = ({ markdown }: Props) => {
   const [copied, setCopied] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
+  const path = usePathname();
 
   useEffect(() => {
     if (copied) {
@@ -29,26 +24,6 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
       return () => clearTimeout(timeout);
     }
   }, [copied]);
-
-  const submit = useCallback(async () => {
-    if (!markdown) return;
-
-    setLoading(true);
-
-    const changelogDate = date ? date.toISOString().slice(0, 10) : today();
-
-    await saveToSupabase({
-      markdown,
-      owner,
-      repo,
-      date: changelogDate,
-    });
-
-    setLoading(false);
-
-    const publicUrl = `/${owner}/${repo}/${changelogDate}`;
-    router.push(publicUrl);
-  }, [markdown, owner, repo, date, router]);
 
   return (
     <div className="w-full flex items-center justify-between text-dimmed border-b border-slate-800 pb-4">
@@ -95,20 +70,26 @@ export const ChangelogActions = ({ markdown, owner, repo, date }: Props) => {
           </Button>
         </div>
         <Button
-          disabled={!markdown || loading}
+          disabled={!markdown}
           size="sm"
           variant="default"
-          className={cn("space-x-2", {
-            "animate-pulse": loading,
-          })}
-          onClick={submit}
+          className={cn("space-x-2")}
+          onClick={() => {
+            if (!markdown) return;
+            const url =
+              typeof window !== "undefined" && window.location.href
+                ? window.location.href
+                : "";
+            copyToClipboard(url);
+            setCopied("url");
+          }}
         >
-          <span className="hidden sm:inline-block">
-            {loading ? "Saving..." : "View page"}
-          </span>
-          <span className="sm:hidden inline-block">
-            {loading ? "Saving..." : "View"}
-          </span>
+          {copied === "url" ? (
+            <CheckIcon className="w-4 h-4 text-green-500" />
+          ) : (
+            <CopyIcon className="w-4 h-4" />
+          )}
+          <span>Copy link</span>
           <ExternalLinkIcon className="w-4 h-4" />
         </Button>
       </div>
