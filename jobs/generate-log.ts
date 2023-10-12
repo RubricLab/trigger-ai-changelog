@@ -110,7 +110,7 @@ client.defineJob({
     });
 
     const gettingCommitsStatus = await io.createStatus("Getting commits", {
-      label: "Fetching commits",
+      label: "Fetching commits from GitHub",
       state: "loading",
     });
 
@@ -140,12 +140,12 @@ client.defineJob({
     }
 
     await gettingCommitsStatus.update("Got commits", {
-      label: `Fetched ${rawCommits.length} commits`,
+      label: `Fetched ${rawCommits.length} commits from GitHub`,
       state: "success",
     });
 
     const summarizingStatus = await io.createStatus("Summarizing commits", {
-      label: "Summarizing commits",
+      label: `Summarizing ${rawCommits.length} commits using OpenAI`,
       state: "loading",
     });
 
@@ -198,12 +198,12 @@ client.defineJob({
     }
 
     await summarizingStatus.update("completed summary", {
-      label: "Summarized commits",
+      label: `Summarized ${rawCommits.length} commits using OpenAI`,
       state: "success",
     });
 
     const savingStatus = await io.createStatus("Storing commits", {
-      label: "Saving changelog",
+      label: "Saving changelog to Supabase",
       state: "loading",
     });
 
@@ -220,7 +220,7 @@ client.defineJob({
     );
 
     await savingStatus.update("completed saving", {
-      label: "Saved changelog",
+      label: "Saved changelog to Supabase",
       state: "success",
     });
 
