@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-popover": "^1.0.6",
@@ -45,6 +46,7 @@
     "endpointId": "autolog-Eq3K"
   },
   "devDependencies": {
-    "supabase": "^1.100.1"
+    "supabase": "^1.100.1",
+    "tsx": "^3.7.1"
   }
 }

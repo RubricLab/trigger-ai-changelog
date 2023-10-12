@@ -1,4 +1,3 @@
-import { Dashboard } from "./components/Dashboard";
 import { Footer } from "./components/Footer";
 import { Form } from "./components/Form";
 import { Gradients } from "./components/Gradients";
