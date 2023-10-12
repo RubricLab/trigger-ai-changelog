@@ -90,7 +90,6 @@ export const ChangelogActions = ({ markdown }: Props) => {
             <CopyIcon className="w-4 h-4" />
           )}
           <span>Copy link</span>
-          <ExternalLinkIcon className="w-4 h-4" />
         </Button>
       </div>
     </div>

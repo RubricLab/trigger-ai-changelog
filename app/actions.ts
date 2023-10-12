@@ -47,6 +47,7 @@ export async function generateChangelog(formData: FormData) {
     .upsert({
       owner,
       repo,
+      repo_url: repoUrl,
     })
     .select()
     .maybeSingle();

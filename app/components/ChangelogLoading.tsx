@@ -2,6 +2,8 @@
 
 import { useEventRunStatuses } from "@trigger.dev/react";
 import { Loader2, CheckCircleIcon, XCircleIcon } from "lucide-react";
+import { Markdown } from "./Markdown";
+import { ChangelogActions } from "./ChangelogActions";
 
 export function ChangelogLoading({ changelogId }: { changelogId: number }) {
   const { fetchStatus, error, statuses, run } = useEventRunStatuses(
@@ -10,17 +12,38 @@ export function ChangelogLoading({ changelogId }: { changelogId: number }) {
 
   switch (fetchStatus) {
     case "loading":
-      return <TaskStatus state="loading" title="Loading..." />;
+      return (
+        <>
+          <ChangelogActions />
+          <TaskStatus state="loading" title="Loading..." />
+        </>
+      );
     case "success":
       return (
         <div className="flex flex-col gap-2">
-          {statuses.map((status, index) => (
-            <TaskStatus key={index} state={status.state} title={status.label} />
-          ))}
+          <ChangelogActions markdown={run.output?.markdown} />
+          {run.output ? (
+            <>
+              <Markdown markdown={run.output.markdown} />
+            </>
+          ) : (
+            statuses.map((status, index) => (
+              <TaskStatus
+                key={index}
+                state={status.state}
+                title={status.label}
+              />
+            ))
+          )}
         </div>
       );
     case "error":
-      return <TaskStatus state="failure" title={error.message} />;
+      return (
+        <>
+          <ChangelogActions />
+          <TaskStatus state="failure" title={error.message} />
+        </>
+      );
     default:
       throw new Error("Invalid fetch status");
   }

@@ -27,6 +27,8 @@ export default async function Changelog({
     .eq("id", changelogId)
     .maybeSingle();
 
+  const repoRecord = changelogRecord.data?.repo;
+
   return (
     <main className="min-h-screen relative">
       <Header />
@@ -36,17 +38,31 @@ export default async function Changelog({
           Changelog using AI
         </h1>
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16">
-          <Form />
+          <Form
+            defaultRepoUrl={repoRecord?.repo_url}
+            defaultStartDate={
+              changelogRecord.data?.start_date
+                ? new Date(changelogRecord.data?.start_date)
+                : undefined
+            }
+            defaultEndDate={
+              changelogRecord.data?.end_date
+                ? new Date(changelogRecord.data?.end_date)
+                : undefined
+            }
+          />
           <div className="col-span-1 lg:col-span-7 xl:col-span-8 max-w-full space-y-4 pb-40 sm:pb-20">
             <h2>
               {owner}/{repo}
             </h2>
             <div className="w-full flex flex-col space-y-4">
-              <ChangelogActions
-                markdown={changelogRecord?.data?.markdown ?? undefined}
-              />
               {changelogRecord?.data?.markdown ? (
-                <Markdown markdown={changelogRecord.data.markdown} />
+                <>
+                  <ChangelogActions
+                    markdown={changelogRecord?.data?.markdown ?? undefined}
+                  />
+                  <Markdown markdown={changelogRecord.data.markdown} />
+                </>
               ) : (
                 <ChangelogLoading changelogId={changelogId} />
               )}

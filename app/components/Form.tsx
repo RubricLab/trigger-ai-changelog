@@ -40,6 +40,7 @@ export function Form({
         label="Enter a public repo URL"
         name="repoUrl"
         placeholder="Enter a public repo URL"
+        initialValue={defaultRepoUrl}
         onChange={setRepoUrl}
         type="url"
         required

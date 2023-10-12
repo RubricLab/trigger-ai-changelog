@@ -49,18 +49,21 @@ export interface Database {
           id: number;
           owner: string;
           repo: string;
+          repo_url: string;
         };
         Insert: {
           created_at?: string | null;
           id?: number;
           owner: string;
           repo: string;
+          repo_url: string;
         };
         Update: {
           created_at?: string | null;
           id?: number;
           owner?: string;
           repo?: string;
+          repo_url?: string;
         };
         Relationships: [];
       };
