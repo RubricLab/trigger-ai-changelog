@@ -29,6 +29,13 @@ export default async function Changelog({
 
   const repoRecord = changelogRecord.data?.repo;
 
+  console.log(changelogRecord.data?.start_date);
+  console.log(
+    changelogRecord.data?.start_date
+      ? new Date(changelogRecord.data?.start_date)
+      : undefined
+  );
+
   return (
     <main className="min-h-screen relative">
       <Header />

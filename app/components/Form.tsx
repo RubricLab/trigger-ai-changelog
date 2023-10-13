@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { generateChangelog } from "../actions";
 import { daysAgo } from "@/lib/utils";
+import { format, parse } from "date-fns";
 
 export function Form({
   defaultRepoUrl,
@@ -49,7 +50,17 @@ export function Form({
       <div className="flex flex-col gap-y-4 sm:flex-row items-end gap-x-4 lg:flex-col lg:gap-y-4 lg:items-start">
         <div className="flex gap-4 w-full">
           <DatePicker label="From" date={startDate} setDate={setStartDate} />
+          <input
+            type="hidden"
+            name="startDate"
+            value={format(startDate, "yyyy-MM-dd")}
+          />
           <DatePicker label="To" date={endDate} setDate={setEndDate} />
+          <input
+            type="hidden"
+            name="endDate"
+            value={format(endDate, "yyyy-MM-dd")}
+          />
         </div>
         <Button
           size="lg"
